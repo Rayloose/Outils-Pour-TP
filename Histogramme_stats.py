@@ -1,29 +1,30 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-A = [] 
+A = np.array([1,2,3]) 
 B = [] 
 C = [] 
 
-Ve = C #Changement de la variable à étudier
+valeurs = A #Changement de la variable à étudier
+Valeur_attendu = 1
 unite = "mL"
 
-moy_Ve=np.mean(Ve) #Moyenne
-sigma_Ve=np.std(Ve,ddof=1) #Ecart-type
-u_Ve= sigma_Ve /(len(Ve))**0.5 #Incertitude-type
+moy_valeurs=np.mean(valeurs) #Moyenne
+sigma_valeurs=np.std(valeurs,ddof=1) #Ecart-type
+u_valeurs= sigma_valeurs /(len(valeurs))**0.5 #Incertitude-type
 
 #affichage des stats
 
-print("Nombre de mesures : ",len(Ve))
-print("Valeur moyenne : ",moy_Ve,unite)
-print("Ecart-type:",sigma_Ve,unite)
-print("Incertitude-type:",u_Ve,unite)
-print("Incertitude élargie, 95% :",2*u_Ve,unite)
+print("Nombre de mesures : ",len(valeurs))
+print("Valeur moyenne : ",moy_valeurs,unite)
+print("Ecart-type:",sigma_valeurs,unite)
+print("Incertitude-type:",u_valeurs,unite)
+print("Incertitude élargie, 95% :",2*u_valeurs,unite)
+print("Z-score",abs(np.mean(valeurs)-Valeur_attendu)/u_valeurs)
 
 #Affichage du graphique
 
-plt.figure(figsize=(12,12))
-plt.hist(Ve,bins=25,range=(49,50))
+plt.hist(valeurs)
 plt.title("Histogramme des valeurs")
 plt.xlabel("mesure")
 plt.ylabel("Fréquence")
