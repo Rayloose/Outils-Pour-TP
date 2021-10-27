@@ -28,12 +28,13 @@ for i in A,B,C :
     #Affichage du graphique
 
 
-for i in [] :
+for i in A,B,C :
 
     plt.hist(i[1])
     plt.title("Histogramme des valeurs")
     plt.xlabel("mesures")
     plt.ylabel("Fréquences")
-    plt.show()
-
+    plt.figure()
+    
+plt.show()
         
