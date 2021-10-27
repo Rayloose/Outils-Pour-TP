@@ -1,31 +1,41 @@
+from os import name
 import numpy as np
 import matplotlib.pyplot as plt
 
-A = np.array([1,2,3]) 
-B = [] 
-C = [] 
 
-valeurs = A #Changement de la variable à étudier
-Valeur_attendu = 1
-unite = "mL"
 
-moy_valeurs=np.mean(valeurs) #Moyenne
-sigma_valeurs=np.std(valeurs,ddof=1) #Ecart-type
-u_valeurs= sigma_valeurs /(len(valeurs))**0.5 #Incertitude-type
+A = ["Foyer Objet",np.array([1,1.15]) , "m"] #exemple : nom de la variable, valeurs, unité(s)
+B = ["Foyer image",np.array([12,24]) , "mL"]
+C = ["Foyer",np.array([0.001,0.002]) , "mol"]
 
-#affichage des stats
+a = 1
 
-print("Nombre de mesures : ",len(valeurs))
-print("Valeur moyenne : ",moy_valeurs,unite)
-print("Ecart-type:",sigma_valeurs,unite)
-print("Incertitude-type:",u_valeurs,unite)
-print("Incertitude élargie, 95% :",2*u_valeurs,unite)
-print("Z-score",abs(np.mean(valeurs)-Valeur_attendu)/u_valeurs)
+for i in A,B,C :
 
-#Affichage du graphique
+    valeurs = i[1] #Changement de la variable à étudier
+    unite = i[2]
 
-plt.hist(valeurs)
-plt.title("Histogramme des valeurs")
-plt.xlabel("mesure")
-plt.ylabel("Fréquence")
-plt.show()
+    #affichage des stats
+    print("----","SERIE",a,"----")
+    print("Nombre de mesures : ",len(valeurs))
+    print("Etendue : ",max(i[1])-min(i[1]))
+    print("Médiane :", np.median(valeurs))
+    print("Valeur moyenne : ", np.mean(valeurs) , unite)
+    print("Ecart-type:", np.std(valeurs,ddof=1) ,unite)
+    print("Incertitude-type:", np.std(valeurs,ddof=1) /(len(valeurs))**0.5 ,unite)
+    print("Incertitude élargie, 95% :",2* np.std(valeurs,ddof=1) /(len(valeurs))**0.5 ,unite)
+    print()
+    a += 1
+
+    #Affichage du graphique
+
+
+for i in A,B,C :
+
+    plt.hist(i[1])
+    plt.title("Histogramme des valeurs")
+    plt.xlabel("mesures")
+    plt.ylabel("Fréquences")
+    plt.show()
+
+        
